@@ -98,6 +98,7 @@ public class ScoreDisplay extends PApplet {
 		staveLines(halfHeight);
 
 		// draw notes
+
 	}
 
 	void drawNotes() {
