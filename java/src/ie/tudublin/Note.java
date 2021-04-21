@@ -42,7 +42,7 @@ class Note {
     @Override
     public String toString() {
 
-        return "Note: " + this.note + "---" + "Duration: " + this.duration + "\n";
+        return this.note + "            " + this.duration;
     }
 
 }

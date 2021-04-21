@@ -7,14 +7,14 @@ import java.lang.String;
 import processing.core.PApplet;
 
 public class ScoreDisplay extends PApplet {
-	// String score = "DEFGABcd";
+	String score = "DEFGABcd";
 	// String score = "D2E2F2G2A2B2c2d2";
 	// String score = "DEF2F2F2EFA2A2B2AFD2E2D2D2D2";
-	String score = "D1E1F2F2F2E1F1A2A2B2A1F1D2E2D2D2D2";
+	// String score = "D1E1F2F2F2E1F1A2A2B2A1F1D2E2D2D2D2";
 
 	// note class instances
-	ArrayList<Character> Notes = new ArrayList<Character>();
-	Note notes;
+	ArrayList<Note> Notes = new ArrayList<Note>();
+	Note n;
 
 	/**
 	 * Loads the score onto the Array list
@@ -22,36 +22,45 @@ public class ScoreDisplay extends PApplet {
 	 * @param score The score to be loaded in String format
 	 */
 	public void loadScore() {
+
+		// variables
+		char note = ' ';
+		int duration = 0;
+
 		for (int i = 0; i < score.length(); i++) {
 			char value = score.charAt(i);
-			Notes.add(value);
+			Boolean digit = Character.isDigit(value);
+			if (digit == true) {
+				// change into number and store in separate arraylist
+				duration = value - '0';
+				// System.out.println("Duration value: " + duration);
+			} else if (digit == false) {
+				note = value;
+				// System.out.println("Note: " + note);
+			}
+			if (duration != 0) { // make notes
+				n = new Note(note, duration);
+				Notes.add(n);
+				duration = 0;
+			}
 		}
 	}
 
 	/**
 	 * Prints the Array list of notes to Standard output
 	 */
-	public void printScore(ArrayList<Character> notes) {
+	public void printScore(ArrayList<Note> notes) {
 
 		// print header
-		System.out.println("\nNote		Duration	Type\n");
+		System.out.println("\nNote	  Duration	  Type\n");
 
-		// print the Array list chars
-		for (Character note : notes) {
-			Boolean digit = Character.isDigit(note);
-			if (digit == true) {
-				// change into number and store in separate arraylist
-				int num = note - '0';
-
-				System.out.printf("		%d", num);
-				// type printout
-				if (num == 1) {
-					System.out.printf("		Crotchet\n");
-				} else if (num == 2) {
-					System.out.printf("		Quaver\n");
-				}
+		for (int i = 0; i < notes.size(); i++) {
+			Note note = Notes.get(i);
+			int time = note.getDuration();
+			if (time == 1) {
+				System.out.println(note.toString() + "		Quaver\n");
 			} else {
-				System.out.printf(" %c", note);
+				System.out.println(note.toString() + "		Crotchet\n");
 			}
 		}
 	}
@@ -77,9 +86,8 @@ public class ScoreDisplay extends PApplet {
 
 		// load array list
 		loadScore();
-		// notes = new Note(key, display)
+		// print score
 		printScore(Notes);
-
 	}
 
 	public void draw() {
