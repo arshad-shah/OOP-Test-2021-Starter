@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch MainThread",
+            "request": "launch",
+            "mainClass": "com.jogamp.newt.util.MainThread",
+            "projectName": "java"
+        },
+        {
+            "type": "java",
             "name": "Launch Main",
             "request": "launch",
             "mainClass": "ie.tudublin.Main",
