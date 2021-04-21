@@ -56,13 +56,21 @@ public class ScoreDisplay extends PApplet {
 		}
 	}
 
+	/**
+	 * Draws the stave lines
+	 */
+	public void staveLines(float halfHeight) {
+		strokeWeight(3);
+
+		line(0, halfHeight, width, halfHeight);
+		line(0, halfHeight - 25, width, halfHeight - 25);
+		line(0, halfHeight + 25, width, halfHeight + 25);
+		line(0, halfHeight - 50, width, halfHeight - 50);
+		line(0, halfHeight + 50, width, halfHeight + 50);
+	}
+
 	public void settings() {
 		size(1000, 500);
-
-		//// How to convert a character to a number
-		// char c = '7'; // c holds the character 7 (55)
-		// int i = c - '0'; // i holds the number 7 (55 - 48)
-		// println(i);
 	}
 
 	public void setup() {
@@ -76,7 +84,12 @@ public class ScoreDisplay extends PApplet {
 
 	public void draw() {
 		background(255);
+		float halfHeight = height / 2;
 
+		// draw lines
+		staveLines(halfHeight);
+
+		// draw notes
 	}
 
 	void drawNotes() {
